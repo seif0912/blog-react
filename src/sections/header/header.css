@@ -1,0 +1,184 @@
+
+header {
+    font-family: "Poppins", sans-serif;
+    position: fixed;
+    width: 100%;
+    transition: .25s;
+    z-index: 9999;
+    top: 25px;
+}
+
+header.sticky{
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    top: 0;
+}
+
+header .container{
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+header .logo {
+    text-transform: capitalize;
+    font-family: "Rubik Wet Paint";
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+}
+
+nav ul {
+    display: flex;
+    gap: 20px;
+}
+
+.btn {
+    color: black;
+    font-weight: bold;
+    font-family: 'Poppins';
+    position: relative;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    height: 2px;
+    background-color: black;
+    width: 0px;
+    transform: translate(-50%, -50%);
+    bottom: -10px;
+    left: 50%;
+    transition: 0.2s;
+}
+
+.btn:hover::before {
+    content: "";
+    position: absolute;
+    width: 125%;
+}
+
+header .links .btn-primary{
+    margin-left: 20px;
+}
+
+.btn-primary {
+    cursor: pointer;
+    display: inline-block;
+    color: white;
+    background-color: black;
+    padding: 7px 20px;
+    border-radius: 7px;
+    font-weight: bold;
+    transition: 0.2s;
+    font-family: 'Poppins';
+}
+
+.btn-primary:hover {
+    background-color: rgb(65, 65, 65);
+}
+
+.burger {
+    height: fit-content;
+    transition: 0.25s;
+    display: none;
+}
+
+.burger span {
+    height: 3px;
+    width: 25px;
+    background-color: black;
+    display: block;
+    transition: inherit;
+}
+
+.burger span:not(:last-child) {
+    margin-bottom: 4px;
+}
+
+.burger.clicked span:nth-child(2) {
+    opacity: 0;
+}
+
+.burger.clicked span:nth-child(1) {
+    transform: rotate(-45deg) translate(-3px, 7px);
+}
+
+.burger.clicked span:nth-child(3) {
+    transform: rotate(45deg) translate(-3px, -7px);
+}
+
+@media (max-width: 640px) {
+    .burger {
+        display: block;
+        padding-left: 15px;
+        padding-right: 15px;
+        cursor: pointer;
+    }
+    nav {
+        display: none;
+    }
+    header {
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+header .nav-clicked {
+    display: block;
+    position: absolute;
+    z-index: 9999;
+    top: 90px;
+    width: 75vw;
+    right: 20px;
+    transition: 0.3s;
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(7px);
+}
+
+header .nav-clicked a {
+    color: white;
+}
+
+header .nav-clicked .links a {
+    color: white;
+}
+
+header .nav-clicked::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -30px;
+    right: 6px;
+    border: 15px solid;
+    border-color: transparent transparent rgba(0, 0, 0, 0.75) transparent;
+}
+
+header .nav-clicked ul {
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 20px;
+}
+
+header .nav-clicked ul li::before {
+    background-color: white;
+    height: 2px;
+}
+
+header .nav-clicked .links {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

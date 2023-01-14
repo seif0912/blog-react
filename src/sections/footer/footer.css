@@ -1,0 +1,113 @@
+
+footer{
+    background-color: #444;
+    color: white;
+    text-align: center;
+    margin: 0;
+}
+
+.seif{
+    color: white;
+    text-decoration: underline;
+}
+
+.seif:hover{
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: underline;
+}
+
+footer .upper .isLogged{
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer .upper ul{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    color: white;
+}
+
+footer .upper ul a{
+    color: white;
+}
+
+footer .upper ul a.btn::before{
+    background-color: white;
+}
+
+footer .footer{
+    background-color: #222;
+    padding: 20px;
+}
+
+footer .footer .social{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+footer .footer .social a{
+    color: white;
+    padding: 5px;
+}
+
+footer .footer .social a:hover{
+    color: rgba(255, 255, 255, 0.6);
+    padding: 5px;
+}
+
+footer .isntLogged{
+    display: flex;
+    justify-content: space-around;
+}
+
+footer .isntLogged .logo a{
+    text-transform: capitalize;
+    font-family: "Rubik Wet Paint";
+    color: white;
+}
+
+footer form{
+    padding: 20px;
+}
+
+footer form input{
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 10px;
+    font-size: 18px;
+    background-color: #bdbdbd;
+    color: black;
+    width: 100%;
+}
+
+footer form input:focus{
+    outline: none;
+    background-color: #fafafa;
+}
+
+footer form button{
+    width: 100%;
+    padding: 10px 10px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: capitalize;
+    cursor: pointer;
+    color: white;
+    background-color: black;
+}
+
+form a {
+    text-align: center;
+    display: block;
+    color: white;
+    font-weight: bold;
+    margin-top: 15px;
+    text-decoration: underline;
+}

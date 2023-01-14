@@ -1,10 +1,12 @@
 import React from 'react'
-import { Hero } from '../../sections/Index'
+import { Hero, Header, Footer } from '../../sections/Index'
 
 const Home = () => {
   return (
     <>
+        <Header/>
         <Hero/>
+        <Footer/>
     </>
   )
 }
