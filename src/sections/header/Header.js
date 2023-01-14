@@ -1,10 +1,10 @@
 import React from 'react'
 import './header.css'
-
+import { Container } from '../../components/Index'
 const Header = () => {
   return (
     <header>
-  <div class="container">
+  <Container>
     <h1 class="logo"><a href="/">blog</a></h1>
     <div class="burger">
       <span></span>
@@ -30,7 +30,7 @@ const Header = () => {
         {/* // <% } %> */}
       </div>
     </nav>
-  </div>
+  </Container>
 </header>
   )
 }

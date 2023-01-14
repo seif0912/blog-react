@@ -1,5 +1,6 @@
 import React from 'react'
 import './footer.css'
+import { Container } from '../../components/Index'
 import { FaInstagram, FaGithub, FaTwitter } from 'react-icons/fa';
 import { BsGlobe2 } from 'react-icons/bs';
 
@@ -7,7 +8,7 @@ import { BsGlobe2 } from 'react-icons/bs';
 const Footer = () => {
   return (
     <footer>
-        <div class="container">
+        <Container>
             {/* <div class="upper">
             <% if(isLoggedIn) {%>
             <div class="isLogged">
@@ -39,9 +40,9 @@ const Footer = () => {
             </div>
             <% } %>
             </div> */}
-        </div>
+        </Container>
         <div class="footer">
-            <div class="container">
+            <Container>
             &copy; all right reserved | developed by <a target='_blank' rel="noreferrer" class="seif" href="https://seifbadreddine.netlify.app/">Seif Badreddine</a>
             <ul class="social">
                 <li><a target='_blank' rel="noreferrer" href="https://seifbadreddine.netlify.app/"><BsGlobe2/></a></li>
@@ -49,7 +50,7 @@ const Footer = () => {
                 <li><a target='_blank' rel="noreferrer" href="https://github.com/seif0912"><FaGithub/></a></li>
                 <li><a target='_blank' rel="noreferrer" href="https://twitter.com/baddredineseif"><FaTwitter/></a></li>
             </ul>
-            </div>
+            </Container>
         </div>
     </footer>
   )
