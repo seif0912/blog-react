@@ -2,6 +2,7 @@ import React from 'react'
 import './login.css'
 import { auth, provider} from '../../firebase/firebase-conf'
 import { signInWithPopup } from 'firebase/auth'
+import { Link } from 'react-router-dom'
 
 const Login = ({setIsAuth}) => {
 
@@ -32,7 +33,7 @@ const Login = ({setIsAuth}) => {
                 <div className="con">
                     <button type="submit">log in</button>
                 </div>
-                <a href="/register">register</a>
+                <Link to="/register">register</Link>
                 </form>
                 <p className='sign-in' onClick={signInWithGoogle}>Sign In with Google</p>
             </div>
