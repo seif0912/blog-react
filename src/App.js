@@ -2,6 +2,8 @@ import { Home, Login } from "./pages/Index";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from './sections/Index'
 // import { useState } from "react";
+// import PrivateRoute from "./privateRoute/PrivateRoute";
+import PrivateRouteLogin from "./privateRoute/PrivateRouteLogin";
 import { AuthProvider } from './contexts/AuthContext'
 
 function App() {
@@ -11,8 +13,13 @@ function App() {
       <AuthProvider>
       <Header/>
       <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/login" element={<Login/>}/>
+          <Route exact path='/' element={<Home/>}/>
+          <Route element={< PrivateRouteLogin />} >
+            <Route path="/login" element={<Login/>} />
+          </Route>
+          <Route element={< PrivateRouteLogin />} >
+            <Route path="/sign-in" element={<Login/>} />
+          </Route>
       </Routes>
       </AuthProvider>
     </Router>
