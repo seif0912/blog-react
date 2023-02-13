@@ -4,12 +4,12 @@ import './hero.css'
 
 const Hero = () => {
   return (
-    <div class="hero">
+    <div className="hero">
         <Container>
-            <div class="box">
+            <div className="box">
             <h1>Stay curious</h1>
             <p>Discover stories, thinking, and expertise from writers on any topic.</p>
-            <a href="/register" class="btn-primary">Start reading</a>
+            <a href="/register" className="btn-primary">Start reading</a>
             
             </div>
         </Container>

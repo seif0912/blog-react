@@ -6,16 +6,16 @@ const Register = ()=>{
         <div className="body">
             <div className="form-container">
         <form action="" method="">
-            <div class="con">
+            <div className="con">
                 <input type="text" name="name" placeholder="Name"/>
             </div>
-            <div class="con">
+            <div className="con">
                 <input type="email" name="email" placeholder="Email"/>
             </div>
-            <div class="con">
+            <div className="con">
                 <input type="password" name="password" placeholder="Password"/>
             </div>
-            <div class="con">
+            <div className="con">
                 <button type="submit">register</button>
             </div>
             <Link to="/login">log in</Link>

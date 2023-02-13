@@ -1,37 +1,50 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import './login.css'
-import { auth, provider} from '../../firebase/firebase-conf'
-import { signInWithPopup } from 'firebase/auth'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../contexts/AuthContext'
 
 const Login = ({setIsAuth}) => {
+    const { login, signInWithGoogle } = useAuth()
+    let loginEmailRef = useRef();
+    let loginPasswordRef = useRef();
+    let [error, setError] = useState('')
 
-    const signInWithGoogle = () => {
-        signInWithPopup(auth, provider)
-        .then(user =>{
-            setIsAuth(true)
-        })
+    async function loginHandler(event){
+        event.preventDefault()
+        try{
+            setError("")
+            await login(loginEmailRef.current.value, loginPasswordRef.current.value)
+        }catch(err){
+            console.log(err.code)
+            if(err.code === 'auth/email-already-in-use')
+                setError("Email already in use")
+            else if(err.code === 'auth/user-not-found')
+                setError("Email not found")
+            else if(err.code === 'auth/invalid-email')
+                setError("Invalid Email")
+            else if(err.code === 'auth/wrong-password')
+                setError("Wrong password")
+            else
+                setError(err.code)
+        }
     }
 
     return (
         <div className="body">
             <div className="form-container">
-                {/* <% if(errors != "") { %>
-                <% errors.forEach((item) => { %>
+                {error &&
                 <div className="alert">
-                <%- item %>
-                </div>
-                <% }); %>
-                <% } %> */}
+                {error}
+                </div>}
                 <form action="/login" method="post">
                 <div className="con">
-                    <input type="email" name="email" placeholder="Email"/>
+                    <input type="email" name="email" ref={loginEmailRef} placeholder="Email"/>
                 </div>
                 <div className="con">
-                    <input type="password" name="password" placeholder="Password"/>
+                    <input type="password" name="password" ref={loginPasswordRef} placeholder="Password"/>
                 </div>
                 <div className="con">
-                    <button type="submit">log in</button>
+                    <button onClick={loginHandler}>log in</button>
                 </div>
                 <Link to="/register">register</Link>
                 </form>

@@ -41,10 +41,10 @@ const Footer = () => {
             <% } %>
             </div> */}
         </Container>
-        <div class="footer">
+        <div className="footer">
             <Container>
-            &copy; all right reserved | developed by <a target='_blank' rel="noreferrer" class="seif" href="https://seifbadreddine.netlify.app/">Seif Badreddine</a>
-            <ul class="social">
+            &copy; all right reserved | developed by <a target='_blank' rel="noreferrer" className="seif" href="https://seifbadreddine.netlify.app/">Seif Badreddine</a>
+            <ul className="social">
                 <li><a target='_blank' rel="noreferrer" href="https://seifbadreddine.netlify.app/"><BsGlobe2/></a></li>
                 <li><a target='_blank' rel="noreferrer" href="https://www.instagram.com/seif_badreddine/"><FaInstagram/></a></li>
                 <li><a target='_blank' rel="noreferrer" href="https://github.com/seif0912"><FaGithub/></a></li>
