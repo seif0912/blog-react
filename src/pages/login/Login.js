@@ -3,7 +3,7 @@ import './login.css'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 
-const Login = ({setIsAuth}) => {
+const Login = () => {
     const { login, signInWithGoogle } = useAuth()
     let loginEmailRef = useRef();
     let loginPasswordRef = useRef();
@@ -15,7 +15,7 @@ const Login = ({setIsAuth}) => {
             setError("")
             await login(loginEmailRef.current.value, loginPasswordRef.current.value)
         }catch(err){
-            console.log(err.code)
+            console.log(err) // fixxxxxxxxx
             if(err.code === 'auth/email-already-in-use')
                 setError("Email already in use")
             else if(err.code === 'auth/user-not-found')
@@ -33,9 +33,10 @@ const Login = ({setIsAuth}) => {
         <div className="body">
             <div className="form-container">
                 {error &&
-                <div className="alert">
-                {error}
-                </div>}
+                    <div className="alert">
+                        {error}
+                    </div>
+                }
                 <form action="/login" method="post">
                 <div className="con">
                     <input type="email" name="email" ref={loginEmailRef} placeholder="Email"/>
