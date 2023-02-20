@@ -1,3 +1,4 @@
+import React from "react";
 import { Home, Login, Register } from "./pages/Index";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from './sections/Index'
