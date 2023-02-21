@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const { currentUser, logout } = useAuth()
-    // console.log('header', currentUser)
+    console.log('header', currentUser)
     let navigate = useNavigate()
 
     async function handleLogout(){
