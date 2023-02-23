@@ -5,19 +5,14 @@ import { addDoc, collection } from "firebase/firestore";
 import { db } from '../../firebase/firebase-conf';
 import { useNavigate } from 'react-router-dom';
 
-
-
 const Write = () => {
     
     const { currentUser } = useAuth()
-    // let [title, setTitle] = useState()
     let titleRef = useRef()
     let bodyRef = useRef()
     let navigate = useNavigate()
     const publishHandler = async (e) => {
         e.preventDefault();
-        console.log(titleRef.current.value)
-        console.log(bodyRef.current.value)
         let post = {
             title: titleRef.current.value,
             body: bodyRef.current.value,
@@ -29,8 +24,6 @@ const Write = () => {
             navigate('/')
         }catch(err){console.log(err)}
     }
-
-    console.log(titleRef)
 
     return (
         <div className="write-container">

@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const { currentUser, logout } = useAuth()
-    console.log('header', currentUser)
+    console.log('current user from Header:', currentUser)
     let navigate = useNavigate()
 
     async function handleLogout(){
@@ -32,9 +32,9 @@ const Header = () => {
             <nav >
             {currentUser&&
             <ul>
-                <li><a className="btn" href="/write">Write</a></li>
-                <li><a className="btn" href="/profile/<%= myId %> ">Profile</a></li>
-                <li><a className="btn" href="/profile/<%= myId %>/settings">settings</a></li>
+                <li><Link className="btn" to="/write">Write</Link></li>
+                <li><Link className="btn" to="/profile/<%= myId %> ">Profile</Link></li>
+                <li><Link className="btn" to="/profile/<%= myId %>/settings">settings</Link></li>
             </ul>
             }
             <div className="links">
