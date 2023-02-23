@@ -2,13 +2,15 @@
 body{
     height: 100vh;
     width: 100vw;
-    background-image: url("../../assets/simon-daniel-fy6Gr1goL60-unsplash.jpg");
-    background-size: cover;
-    background-position: center;
+    /* background-size: cover;
+    background-position: center; */
 }
 
 .write-container{
     display: flex;
+    background-image: url("../../assets/simon-daniel-fy6Gr1goL60-unsplash.jpg");
+    background-position: center;
+    background-size: cover;
     justify-content: center;
     align-items: center;
     width: 100vw;

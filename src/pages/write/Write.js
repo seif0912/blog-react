@@ -17,7 +17,8 @@ const Write = () => {
             title: titleRef.current.value,
             body: bodyRef.current.value,
             author: currentUser.displayName,
-            authorId: currentUser.uid
+            authorId: currentUser.uid,
+            visibility: "public"
         }
         try{
             await addDoc(collection(db, "posts"), post);
