@@ -33,7 +33,7 @@ const Header = () => {
             {currentUser&&
             <ul>
                 <li><Link className="btn" to="/write">Write</Link></li>
-                <li><Link className="btn" to="/profile/<%= myId %> ">Profile</Link></li>
+                <li><Link className="btn" to={`/profile/${currentUser.uid}`}>Profile</Link></li>
                 <li><Link className="btn" to="/profile/<%= myId %>/settings">settings</Link></li>
             </ul>
             }

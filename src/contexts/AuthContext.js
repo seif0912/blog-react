@@ -37,7 +37,7 @@ export function AuthProvider({ children }) {
     function signInWithGoogle(){
         signInWithPopup(auth, provider)
         .then((user) => {
-            setDoc(doc(db, "users", user.user.uid), {email: user.user.email});
+            setDoc(doc(db, "users", user.user.uid), {email: user.user.email, displayName: user.user.displayName});
         }).catch(err=> console.error(err))
     }
 

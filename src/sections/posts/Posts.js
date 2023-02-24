@@ -11,7 +11,7 @@ const Posts = () => {
           let docs = onSnapshot(docsRef, (data)=>{
             let querySnapshot = data.docs.map((doc)=><Post key={doc.id} post={doc}/>);
             setPosts(querySnapshot)
-            console.log(data.docs)
+            // console.log(data.docs)
           })
           return docs
         }

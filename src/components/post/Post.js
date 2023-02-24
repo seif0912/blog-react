@@ -2,8 +2,8 @@ import React from 'react'
 import './post.css'
 
 const Post = ({post}) => {
-    console.log(post)
-    console.log(post.data())
+    // console.log(post)
+    // console.log(post.data())
   return (
       <div className="post">
         <div className="col">

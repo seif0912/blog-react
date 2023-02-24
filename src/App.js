@@ -16,7 +16,6 @@ function App() {
       <Routes>
           <Route exact path='/' element={<Home/>}/>
           <Route exact path='/write' element={<Write/>}/>
-          {/* <Route exact path='/profile/' element={<Write/>}/> */}
           <Route path="/profile/:profileId" element={<ProfilePage />} />
           <Route element={< PrivateRouteLogin />} >
             <Route path="/login" element={<Login/>} />
