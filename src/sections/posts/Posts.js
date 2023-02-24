@@ -19,8 +19,10 @@ const Posts = () => {
       },[])
 
   return (
-    <div>
-      {posts}
+    <div className='posts'>
+      <div className='container'>
+        {posts}
+      </div>
     </div>
   )
 }
