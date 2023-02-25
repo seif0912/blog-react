@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './header.css'
 import {Link} from 'react-router-dom'
 import { Container } from '../../components/Index'
@@ -8,6 +8,18 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Header = () => {
+  let [ sticky, setSticky ] = useState(false)
+  useEffect(() => {
+    const updateScrollDirection = () => {
+      const scrollY = window.pageYOffset;
+      setSticky(scrollY > 50);
+    };
+    window.addEventListener("scroll", updateScrollDirection); // add event listener
+    return () => {
+      window.removeEventListener("scroll", updateScrollDirection); // clean up
+    }
+  }, [sticky]);
+
     const { currentUser, logout } = useAuth()
     console.log('current user from Header:', currentUser)
     let navigate = useNavigate()
@@ -21,7 +33,7 @@ const Header = () => {
         }
     }
   return (
-    <header>
+    <header className={sticky ? 'sticky': ''}>
         <Container>
             <h1 className="logo"><Link to="/">blog</Link></h1>
             <div className="burger">
