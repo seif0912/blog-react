@@ -1,5 +1,5 @@
 import React from "react";
-import { Home, Login, Register, Write, ProfilePage } from "./pages/Index";
+import { Home, Login, Register, Write, ProfilePage, PostPage } from "./pages/Index";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from './sections/Index'
 // import { useState } from "react";
@@ -17,6 +17,7 @@ function App() {
           <Route exact path='/' element={<Home/>}/>
           <Route exact path='/write' element={<Write/>}/>
           <Route path="/profile/:profileId" element={<ProfilePage />} />
+          <Route path="/post/:postId" element={<PostPage />} />
           <Route element={< PrivateRouteLogin />} >
             <Route path="/login" element={<Login/>} />
           </Route>
