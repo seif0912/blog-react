@@ -7,7 +7,7 @@ import { Post } from '../../components/Index';
 
 const ProfilePage = () => {
   let { profileId } = useParams();
-  console.log(profileId)
+  // console.log(profileId)
   let [ posts, setPosts ] = useState();  
   let [ postsCount, setPostsCount ] = useState();  
   let [ profileDisplayName, setProfileDisplayName ] = useState();
@@ -33,7 +33,7 @@ const ProfilePage = () => {
       try{
         const docRef = doc(db, "users", profileId);
         const docSnap = await getDoc(docRef);
-        console.log('get Profile Name: ', docSnap.data())
+        // console.log('get Profile Name: ', docSnap.data())
         setProfileDisplayName(docSnap.data().displayName)
       }catch(e){
         setProfileExistance(false)
