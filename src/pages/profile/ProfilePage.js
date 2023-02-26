@@ -12,7 +12,7 @@ const ProfilePage = () => {
   let [ postsCount, setPostsCount ] = useState();  
   let [ profileDisplayName, setProfileDisplayName ] = useState();
   let [ profileExistance, setProfileExistance ] = useState(true);
-
+  const [loading, setLoading] = useState(true)
 
   useEffect(()=>{
     function fetchData(){
@@ -22,6 +22,7 @@ const ProfilePage = () => {
         setPosts(querySnapshot)
         console.log(data.docs)
         setPostsCount(data.docs.length)
+        setLoading(prev => !prev)
       })
       return docs
     }
@@ -37,6 +38,7 @@ const ProfilePage = () => {
         setProfileDisplayName(docSnap.data().displayName)
       }catch(e){
         setProfileExistance(false)
+        setLoading(prev => !prev)
       }
     }
     return getProfileName
@@ -48,14 +50,23 @@ const ProfilePage = () => {
       <div className="hero">
         <div className="container">
           <div className="box">
-            {
-              profileExistance?
+            {loading?
               <>
-                <h1> {profileDisplayName}</h1>
-                <p>total posts: {postsCount} </p>
-                <p>total likes: profileData.total_likes </p>
-              </>:
-              <h1> Profile doesn't exist</h1>
+                <h1>loading...</h1>
+              </>
+              :
+              <>
+                {
+                  profileExistance?
+                  <>
+                    <h1> {profileDisplayName}</h1>
+                    <p>total posts: {postsCount} </p>
+                    <p>total likes: profileData.total_likes </p>
+                  </>:
+                  <h1> Profile doesn't exist</h1>
+                  
+                }
+              </>
             }
           </div>
         </div>
