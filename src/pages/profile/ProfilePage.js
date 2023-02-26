@@ -27,7 +27,7 @@ const ProfilePage = () => {
       return docs
     }
     return fetchData()
-  },[])
+  },[profileId])
 
   useEffect(()=>{
     let getProfileName = async ()=>{
@@ -42,7 +42,7 @@ const ProfilePage = () => {
       }
     }
     return getProfileName
-  },[])
+  },[profileId])
 
   
   return (

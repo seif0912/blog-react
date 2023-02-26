@@ -41,7 +41,7 @@ const PostPage = () => {
           }
         }
         return getPost
-    },[])
+    },[postId, currentUser.uid])
     console.log(post)
 
     // like handler
