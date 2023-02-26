@@ -21,12 +21,12 @@ export function AuthProvider({ children }) {
         .then((user)=>{
             updateProfile(auth.currentUser, {
                 displayName: name
-              }).then((res) => {
+            }).then((res) => {
                 console.log(res)
+                setDoc(doc(db, "users", user.user.uid), {email: user.user.email, displayName: user.user.displayName});
               }).catch((error) => {
                 console.log(error)
               });
-            setDoc(doc(db, "users", user.user.uid), {email: user.user.email});
         }).catch(err=> console.error(err))
     }
 
