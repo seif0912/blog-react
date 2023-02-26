@@ -34,6 +34,7 @@ const PostPage = () => {
                 setPostCreationTime( docSnap._document.createTime.toTimestamp().toDate().toString())
                 setPostExistance(true)
                 setLoading(prev => !prev)
+                return setLoading(false)
             }
         }catch(e){
             console.error(e);
@@ -84,6 +85,12 @@ const PostPage = () => {
                                     <span className="heart">{liked? <HiHeart/> : <HiOutlineHeart/>}</span>
                                 </div>
                             </div>
+                            {post.data().authorId === currentUser.uid &&
+                                <div class="post-settings">
+                                    <h3 id="edit-btn">edit</h3>
+                                    <h3 id="delete-btn">delete</h3>
+                                </div>
+                            }
                         </div>
                     </>
                     

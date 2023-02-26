@@ -2,32 +2,44 @@ import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import { Footer } from '../../sections/Index';
 import { db } from '../../firebase/firebase-conf';
-import { collection, doc, getDoc, onSnapshot, query, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 import { Post } from '../../components/Index';
+import { useAuth } from '../../contexts/AuthContext';
 
 const ProfilePage = () => {
+  let { currentUser } = useAuth()
   let { profileId } = useParams();
   // console.log(profileId)
   let [ posts, setPosts ] = useState();  
   let [ postsCount, setPostsCount ] = useState();  
   let [ profileDisplayName, setProfileDisplayName ] = useState();
   let [ profileExistance, setProfileExistance ] = useState(true);
-  const [loading, setLoading] = useState(true)
-
+  let [loading, setLoading] = useState()
+  console.log(posts)
   useEffect(()=>{
-    function fetchData(){
-      let docsRef = query(collection(db, "posts"), where('authorId', '==', profileId))
-      let docs = onSnapshot(docsRef, (data)=>{
+    let fetchData = async ()=>{
+      setLoading(true);
+      try {
+        let docsRef
+        if( profileId === currentUser.uid){
+          docsRef = query(collection(db, "posts"), where('authorId', '==', profileId))
+        }else{
+          docsRef = query(collection(db, "posts"), where('authorId', '==', profileId), where('visibility', '==', 'public'))
+        }
+        setLoading(true)
+        let data = await getDocs(docsRef)
         let querySnapshot = data.docs.map((doc)=><Post key={doc.id} post={doc}/>);
         setPosts(querySnapshot)
         console.log(data.docs)
         setPostsCount(data.docs.length)
-        setLoading(prev => !prev)
-      })
-      return docs
+        return setLoading(false)
+
+      }catch(e){console.error(e);}
+      
+      return 
     }
-    return fetchData()
-  },[profileId])
+    return fetchData
+  },[profileId, currentUser.uid])
 
   useEffect(()=>{
     let getProfileName = async ()=>{
@@ -37,6 +49,7 @@ const ProfilePage = () => {
         // console.log('get Profile Name: ', docSnap.data())
         setProfileDisplayName(docSnap.data().displayName)
       }catch(e){
+        console.log(e)
         setProfileExistance(false)
         setLoading(prev => !prev)
       }
@@ -61,7 +74,6 @@ const ProfilePage = () => {
                   <>
                     <h1> {profileDisplayName}</h1>
                     <p>total posts: {postsCount} </p>
-                    <p>total likes: profileData.total_likes </p>
                   </>:
                   <h1> Profile doesn't exist</h1>
                   
