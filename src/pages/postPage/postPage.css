@@ -81,7 +81,7 @@
     margin-left: 25px;
 }
 
-.like i {
+.like .heart {
     cursor: pointer;
     font-size: 18px;
 }
