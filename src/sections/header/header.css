@@ -103,15 +103,15 @@ header .links .btn-primary{
     margin-bottom: 4px;
 }
 
-.burger.clicked span:nth-child(2) {
+.burger.active span:nth-child(2) {
     opacity: 0;
 }
 
-.burger.clicked span:nth-child(1) {
+.burger.active span:nth-child(1) {
     transform: rotate(-45deg) translate(-3px, 7px);
 }
 
-.burger.clicked span:nth-child(3) {
+.burger.active span:nth-child(3) {
     transform: rotate(45deg) translate(-3px, -7px);
 }
 
@@ -131,7 +131,7 @@ header .links .btn-primary{
     }
 }
 
-header .nav-clicked {
+header nav.active {
     display: block;
     position: absolute;
     z-index: 9999;
@@ -144,15 +144,15 @@ header .nav-clicked {
     backdrop-filter: blur(7px);
 }
 
-header .nav-clicked a {
+header nav.active a {
     color: white;
 }
 
-header .nav-clicked .links a {
+header nav.active .links a {
     color: white;
 }
 
-header .nav-clicked::before {
+header nav.active::before {
     content: "";
     position: absolute;
     width: 0;
@@ -163,19 +163,19 @@ header .nav-clicked::before {
     border-color: transparent transparent rgba(0, 0, 0, 0.75) transparent;
 }
 
-header .nav-clicked ul {
+header nav.active ul {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     padding-top: 20px;
 }
 
-header .nav-clicked ul li::before {
+header nav.active ul li::before {
     background-color: white;
     height: 2px;
 }
 
-header .nav-clicked .links {
+header nav.active .links {
     margin-top: 30px;
     margin-bottom: 30px;
     display: flex;

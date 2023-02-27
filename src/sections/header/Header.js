@@ -32,16 +32,28 @@ const Header = () => {
           console.error(error)
         }
     }
+    // handle mobile menu
+    let [toggleclick, setToggleClick] = useState(false)
+    useEffect(() => {
+      function handleResize() {
+        // console.log('resized to: ', window.innerWidth, 'x', window.innerHeight)
+        if(window.innerWidth > 460){
+          setToggleClick(false)
+        }
+      }
+  
+      window.addEventListener('resize', handleResize)
+    })
   return (
     <header className={sticky ? 'sticky': ''}>
         <Container>
             <h1 className="logo"><Link to="/">blog</Link></h1>
-            <div className="burger">
+            <div onClick={()=>{setToggleClick(prev => !prev)}} className={`burger ${toggleclick ? 'active' : ''}`}>
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            <nav >
+            <nav className={toggleclick ? 'active' : ''}>
             {currentUser&&
             <ul>
                 <li><Link className="btn" to="/write">Write</Link></li>
