@@ -36,9 +36,14 @@ const ProfilePage = () => {
 
       }catch(e){console.error(e);}
       
-      return 
+      return setLoading(false)
     }
-    return fetchData
+    fetchData()
+    let cleanUp = () => {
+      setPostsCount(0)
+      setPosts()
+    }
+    return cleanUp()
   },[profileId, currentUser.uid])
 
   useEffect(()=>{
@@ -48,13 +53,15 @@ const ProfilePage = () => {
         const docSnap = await getDoc(docRef);
         // console.log('get Profile Name: ', docSnap.data())
         setProfileDisplayName(docSnap.data().displayName)
+        // return setProfileDisplayName()
       }catch(e){
         console.log(e)
         setProfileExistance(false)
         setLoading(prev => !prev)
       }
     }
-    return getProfileName
+    getProfileName()
+    return setProfileDisplayName()
   },[profileId])
 
   

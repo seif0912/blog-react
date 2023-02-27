@@ -45,7 +45,7 @@ const Header = () => {
             {currentUser&&
             <ul>
                 <li><Link className="btn" to="/write">Write</Link></li>
-                <li><a className="btn" href={`/profile/${currentUser.uid}`}>Profile</a></li>
+                <li><Link className="btn" to={`/profile/${currentUser.uid}`}>Profile</Link></li>
                 {/* <li><Link className="btn" to="/settings">settings</Link></li> */}
             </ul>
             }
