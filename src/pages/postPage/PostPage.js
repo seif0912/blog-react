@@ -6,6 +6,7 @@ import './postPage.css'
 import { Link } from 'react-router-dom';
 import { HiOutlineHeart, HiHeart } from 'react-icons/hi'
 import { useAuth } from '../../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const PostPage = () => {
     let {currentUser} = useAuth()
@@ -17,7 +18,8 @@ const PostPage = () => {
     const [loading, setLoading] = useState(true)
     const [liked, setLiked] = useState(false)
     const [toggleEdit, setToggleEdit] = useState(false)
-    // const [toggleDelete, setToggleDelete] = useState(false)
+    const [toggleDelete, setToggleDelete] = useState(false)
+    let navigate = useNavigate()
 
     // fetch the post
     useEffect(()=>{
@@ -84,6 +86,17 @@ const PostPage = () => {
         }catch(e){console.error(e);}
     }
 
+    // delete handler
+    let deleteHandler = async(e) =>{
+        e.preventDefault()
+        console.log('delete')
+        try{
+            await deleteDoc(doc(db, "posts", postId));
+            setToggleDelete(false)
+            navigate(`/profile/${currentUser.uid}`)
+        }catch(e){console.log(e);}
+    }
+
     return (
         <div className="write-container">
             {loading?
@@ -111,28 +124,48 @@ const PostPage = () => {
                             <>
                                 <div className="post-settings">
                                     <h3 id="edit-btn" onClick={()=>{setToggleEdit(true)}}>edit</h3>
-                                    <h3 id="delete-btn">delete</h3>
+                                    <h3 id="delete-btn" onClick={()=>{setToggleDelete(true)}}>delete</h3>
                                 </div>
                               </>
                             }
                         </div>
                         {post.data().authorId === currentUser.uid &&
-                        <div className={`box post ${toggleEdit? 'active' : ''}`}>
-                            <form action="">
-                                <div className="col">
-                                <input ref={editTitleRef} type="text" name="title" placeholder="title" defaultValue={post.data().title} required/>
+                        <>
+                            { toggleEdit &&
+                            <div className={`box post ${toggleEdit? 'active' : ''}`}>
+                                <form action="">
+                                    <div className="col">
+                                    <input ref={editTitleRef} type="text" name="title" placeholder="title" defaultValue={post.data().title} required/>
+                                    </div>
+                                    <div className="col">
+                                    <textarea ref={editBodyRef} name="body" placeholder="what's on your mind,?" defaultValue={ post.data().body } required></textarea>
+                                    </div>
+                                    <div className="col">
+                                    <button onClick={editHandler} className="publish" type="submit">publish</button>
+                                    </div>
+                                </form>
+                                <div className="post-settings">
+                                    <h3 id="cancel-btn" onClick={()=>{setToggleEdit(false)}}>cancel</h3>
                                 </div>
-                                <div className="col">
-                                <textarea ref={editBodyRef} name="body" placeholder="what's on your mind,?" defaultValue={ post.data().body } required></textarea>
-                                </div>
-                                <div className="col">
-                                <button onClick={editHandler} className="publish" type="submit">publish</button>
-                                </div>
-                            </form>
-                            <div className="post-settings">
-                                <h3 id="cancel-btn" onClick={()=>{setToggleEdit(false)}}>cancel</h3>
                             </div>
-                        </div>
+                            }
+                        </>
+                        }
+                        {post.data().authorId === currentUser.uid &&
+                            <>
+                                {toggleDelete &&
+                                    <div className={`delete ${toggleDelete? 'active' : ''}`}>
+                                        <div className="delete-box">
+                                        <p>are you sure you want to delete this post</p>
+                                        <div className="btns">
+                                            <h3 onClick={()=>{setToggleDelete(false)}}>cancel</h3>
+                                            <h3 onClick={deleteHandler}>delete</h3>
+                                        </div>
+                                        </div>
+                                    </div>
+                                
+                                }
+                            </>
                         }
                     </>
                     
