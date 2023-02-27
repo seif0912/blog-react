@@ -1,5 +1,5 @@
-import { deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react'
+import { deleteDoc, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom';
 import { db } from '../../firebase/firebase-conf';
 import './postPage.css'
@@ -16,6 +16,10 @@ const PostPage = () => {
     const [author, setAuthor] = useState()
     const [loading, setLoading] = useState(true)
     const [liked, setLiked] = useState(false)
+    const [toggleEdit, setToggleEdit] = useState(false)
+    // const [toggleDelete, setToggleDelete] = useState(false)
+
+    // fetch the post
     useEffect(()=>{
         let getPost = async ()=>{
           try{
@@ -42,7 +46,7 @@ const PostPage = () => {
           }
         }
         return getPost
-    },[postId, currentUser.uid])
+    },[postId, toggleEdit, currentUser.uid])
     console.log(post)
 
     // like handler
@@ -62,6 +66,24 @@ const PostPage = () => {
         }catch(e){console.error(e)}
     }
 
+    // edit handler
+    let editTitleRef = useRef()
+    let editBodyRef = useRef()
+    let editHandler = async(e) =>{
+        e.preventDefault()
+        console.log('edit')
+        // console.log(editTitleRef.current.value)
+        // console.log(editBodyRef.current.value)
+        const docRef = doc(db, "posts", postId);
+        try{
+            await updateDoc(docRef, {
+                'title': editTitleRef.current.value,
+                'body': editBodyRef.current.value
+            });
+            setToggleEdit(false)
+        }catch(e){console.error(e);}
+    }
+
     return (
         <div className="write-container">
             {loading?
@@ -72,7 +94,7 @@ const PostPage = () => {
                 <>
                 {postExistance? (
                     <>
-                        <div className="box post active">
+                        <div className={`box post ${!toggleEdit? 'active' : ''}`}>
                             <h2>{post.data().title}</h2>
                             <p className="post-body">{post.data().body}</p>
                             {/* <p>{post.data().author}</p> */}
@@ -86,12 +108,32 @@ const PostPage = () => {
                                 </div>
                             </div>
                             {post.data().authorId === currentUser.uid &&
-                                <div class="post-settings">
-                                    <h3 id="edit-btn">edit</h3>
+                            <>
+                                <div className="post-settings">
+                                    <h3 id="edit-btn" onClick={()=>{setToggleEdit(true)}}>edit</h3>
                                     <h3 id="delete-btn">delete</h3>
                                 </div>
+                              </>
                             }
                         </div>
+                        {post.data().authorId === currentUser.uid &&
+                        <div className={`box post ${toggleEdit? 'active' : ''}`}>
+                            <form action="">
+                                <div className="col">
+                                <input ref={editTitleRef} type="text" name="title" placeholder="title" defaultValue={post.data().title} required/>
+                                </div>
+                                <div className="col">
+                                <textarea ref={editBodyRef} name="body" placeholder="what's on your mind,?" defaultValue={ post.data().body } required></textarea>
+                                </div>
+                                <div className="col">
+                                <button onClick={editHandler} className="publish" type="submit">publish</button>
+                                </div>
+                            </form>
+                            <div className="post-settings">
+                                <h3 id="cancel-btn" onClick={()=>{setToggleEdit(false)}}>cancel</h3>
+                            </div>
+                        </div>
+                        }
                     </>
                     
                     )
