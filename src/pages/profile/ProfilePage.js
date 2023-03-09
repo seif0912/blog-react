@@ -10,59 +10,69 @@ const ProfilePage = () => {
   let { currentUser } = useAuth()
   let { profileId } = useParams();
   // console.log(profileId)
-  let [ posts, setPosts ] = useState();  
+  let [ posts, setPosts ] = useState([]);  
   let [ postsCount, setPostsCount ] = useState();  
   let [ profileDisplayName, setProfileDisplayName ] = useState();
   let [ profileExistance, setProfileExistance ] = useState(true);
-  let [loading, setLoading] = useState()
+  let [loading, setLoading] = useState(true)
   console.log(posts)
+
   useEffect(()=>{
-    let fetchData = async ()=>{
-      setLoading(true);
+    let cleanUp = () => {
+      setProfileExistance(false)
+      setPostsCount(undefined)
+      setLoading(false)
+      setPosts([])
+    }
+
+    // fetch profile posts
+    let fetchProfilePosts = async ()=>{
       try {
         let docsRef
-        if( profileId === currentUser.uid){
-          docsRef = query(collection(db, "posts"), where('authorId', '==', profileId))
+        // console.log('current user uid', currentUser.uid)
+        if(currentUser){
+          if( profileId === currentUser.uid ){
+            docsRef = query(collection(db, "posts"), where('authorId', '==', profileId))
+          }else{
+            docsRef = query(collection(db, "posts"), where('authorId', '==', profileId), where('visibility', '==', 'public'))
+          }
         }else{
           docsRef = query(collection(db, "posts"), where('authorId', '==', profileId), where('visibility', '==', 'public'))
         }
-        setLoading(true)
         let data = await getDocs(docsRef)
         let querySnapshot = data.docs.map((doc)=><Post key={doc.id} post={doc}/>);
         setPosts(querySnapshot)
         console.log(data.docs)
         setPostsCount(data.docs.length)
-        return setLoading(false)
 
       }catch(e){console.error(e);}
-      
-      return setLoading(false)
     }
-    fetchData()
-    let cleanUp = () => {
-      setPostsCount(0)
-      setPosts()
-    }
-    return cleanUp()
-  },[profileId, currentUser.uid])
 
-  useEffect(()=>{
+    //get the profile
     let getProfileName = async ()=>{
+      setLoading(true)
       try{
         const docRef = doc(db, "users", profileId);
         const docSnap = await getDoc(docRef);
         // console.log('get Profile Name: ', docSnap.data())
         setProfileDisplayName(docSnap.data().displayName)
         // return setProfileDisplayName()
+        setProfileExistance(true)
+        // if (profileExistance){
+        //   console.log('profile exits')
+        // }
+        fetchProfilePosts()
+        setLoading(false)
       }catch(e){
-        console.log(e)
+        console.error(e)
         setProfileExistance(false)
-        setLoading(prev => !prev)
+        setLoading(false)
       }
     }
     getProfileName()
-    return setProfileDisplayName()
-  },[profileId])
+
+    return cleanUp()
+  },[currentUser, profileId])
 
   
   return (
