@@ -14,14 +14,14 @@ const ProfilePage = () => {
   let [ postsCount, setPostsCount ] = useState();  
   let [ profileDisplayName, setProfileDisplayName ] = useState();
   let [ profileExistance, setProfileExistance ] = useState(true);
-  let [loading, setLoading] = useState(true)
+  let [loading, setLoading] = useState(false)
   console.log(posts)
 
   useEffect(()=>{
     let cleanUp = () => {
-      setProfileExistance(false)
+      setProfileExistance(true)
       setPostsCount(undefined)
-      setLoading(false)
+      setLoading(true)
       setPosts([])
     }
 
@@ -57,10 +57,10 @@ const ProfilePage = () => {
         // console.log('get Profile Name: ', docSnap.data())
         setProfileDisplayName(docSnap.data().displayName)
         // return setProfileDisplayName()
-        setProfileExistance(true)
         // if (profileExistance){
-        //   console.log('profile exits')
-        // }
+          //   console.log('profile exits')
+          // }
+        setProfileExistance(true)
         fetchProfilePosts()
         setLoading(false)
       }catch(e){

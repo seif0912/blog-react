@@ -3,7 +3,6 @@ import { useContext, useState, useEffect } from 'react'
 import { auth, db, provider } from '../firebase/firebase-conf'
 import { doc, setDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup } from "firebase/auth";
-import { updateProfile } from 'firebase/auth';
 
 const AuthContext = React.createContext()
 
@@ -16,18 +15,8 @@ export function AuthProvider({ children }) {
     let [loading, setLoading] = useState(true)
 
 
-    function signup(email, password, name){
-        createUserWithEmailAndPassword(auth, email, password)
-        .then((user)=>{
-            updateProfile(auth.currentUser, {
-                displayName: name
-            }).then((res) => {
-                console.log(res)
-                setDoc(doc(db, "users", user.user.uid), {email: user.user.email, displayName: user.user.displayName});
-              }).catch((error) => {
-                console.log(error)
-              });
-        }).catch(err=> console.error(err))
+    function signup(email, password){
+        return createUserWithEmailAndPassword(auth, email, password)
     }
 
     function login(email, password){

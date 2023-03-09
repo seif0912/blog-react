@@ -15,17 +15,7 @@ const Login = () => {
             setError("")
             await login(loginEmailRef.current.value, loginPasswordRef.current.value)
         }catch(err){
-            console.log(err) // fixxxxxxxxx
-            if(err.code === 'auth/email-already-in-use')
-                setError("Email already in use")
-            else if(err.code === 'auth/user-not-found')
-                setError("Email not found")
-            else if(err.code === 'auth/invalid-email')
-                setError("Invalid Email")
-            else if(err.code === 'auth/wrong-password')
-                setError("Wrong password")
-            else
-                setError(err.code)
+            setError(err.code.slice(5,err.code.length).replaceAll('-', ' '))
         }
     }
 
