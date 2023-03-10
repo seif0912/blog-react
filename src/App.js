@@ -1,5 +1,5 @@
 import React from "react";
-import { Home, Login, Register, Write, ProfilePage, PostPage } from "./pages/Index";
+import { Home, Login, Register, Write, ProfilePage, PostPage, Settings } from "./pages/Index";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from './sections/Index'
 import PrivateRouteLogin from "./privateRoute/PrivateRouteLogin";
@@ -23,7 +23,7 @@ function App() {
             <Route path="/register" element={<Register/>} />
           </Route>
           <Route element={< PrivateRoute/>} >
-            <Route path="/settings" element={<h1>setting</h1>} />
+            <Route path="/settings" element={<Settings/>} />
           </Route>
       </Routes>
       </AuthProvider>

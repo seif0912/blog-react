@@ -1,0 +1,95 @@
+.box{
+    background-color: rgba(50, 50, 50, 0.85);
+    padding: 30px 20px;
+    max-width: 650px;
+    min-width: 320px;
+    color: white;
+}
+
+.more .title{
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.493);
+}
+
+.more .title p{
+    margin: 0;
+    cursor: pointer;
+    padding: 20px 15px;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+}
+
+.more .title p:hover{
+    border-bottom: 2px solid rgba(255, 255, 255, 0.781);
+}
+
+.more .title p.active{
+    border-bottom: 2px solid rgba(255, 255, 255, 0.952);
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.more .info-box .box-con{
+    margin: 0;
+    min-height: max-content;
+    width: 100%;
+    display: none;
+    padding-top: 20px;
+}
+
+.more .info-box .box-con.active{
+    display: block;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.more input{
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 10px;
+    font-size: 18px;
+    background-color: #f1f1f1;
+    color: black;
+    width: 100%;
+}
+
+.more input:focus{
+    outline: none;
+    background-color: #fafafa;
+}
+
+.more form button{
+    width: 100%;
+    padding: 10px 10px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: capitalize;
+    cursor: pointer;
+    color: white;
+    background-color: black;
+}
+
+.more form .btn-primary:hover {
+    background-color: rgb(26, 26, 26);
+}
+
+.failed {
+    text-align: center;
+    background-color: rgb(138, 8, 8);
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.success {
+    text-align: center;
+    background-color: rgb(40, 109, 1);
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.9);
+}
