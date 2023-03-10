@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from './sections/Index'
 import PrivateRouteLogin from "./privateRoute/PrivateRouteLogin";
 import { AuthProvider } from './contexts/AuthContext'
+import PrivateRoute from "./privateRoute/PrivateRoute";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
           </Route>
           <Route element={< PrivateRouteLogin />} >
             <Route path="/register" element={<Register/>} />
+          </Route>
+          <Route element={< PrivateRoute/>} >
+            <Route path="/settings" element={<h1>setting</h1>} />
           </Route>
       </Routes>
       </AuthProvider>

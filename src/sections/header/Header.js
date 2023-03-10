@@ -58,7 +58,7 @@ const Header = () => {
             <ul>
                 <li><Link className="btn" to="/write">Write</Link></li>
                 <li><Link className="btn" to={`/profile/${currentUser.uid}`}>Profile</Link></li>
-                {/* <li><Link className="btn" to="/settings">settings</Link></li> */}
+                <li><Link className="btn" to="/settings">settings</Link></li>
             </ul>
             }
             <div className="links">
