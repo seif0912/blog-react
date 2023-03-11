@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import './write.css'
 import { useAuth } from '../../contexts/AuthContext'
-import { addDoc, collection } from "firebase/firestore";
+import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { db } from '../../firebase/firebase-conf';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,7 +18,8 @@ const Write = () => {
             body: bodyRef.current.value,
             author: currentUser.displayName,
             authorId: currentUser.uid,
-            visibility: "public"
+            visibility: "public",
+            createdAt: Timestamp.now()
         }
         try{
             await addDoc(collection(db, "posts"), post);
